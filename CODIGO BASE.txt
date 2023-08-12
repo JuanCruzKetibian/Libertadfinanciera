@@ -1,0 +1,239 @@
+<!DOCTYPE html> <!--se especifica que estamos hablando en html-->
+<html lang="es"> <!-- se especifca en que lenguaje esta el sitio -->
+<head> <!-- lo que esta dentro del head no se va a ver en el sitio, es la parte de "atras" del sitio (configuraciones) -->
+    <meta charset="UTF-8"> <!-- visualizacion de los caracteres especiales -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> <!-- se usa para la compatibilidad entre el internet explorer y el microsoft edge -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- ajustable a celulares o tablets -->
+    <title> Operador de acciones </title> <!-- titulo del sitio web en la pestaña -->
+</head>
+<H1>Bienvenidos a tu libertad financiera</H1>
+<body>
+    <header>
+        <h1>Tenencia</h1>
+        <label for="accion">Accion:</label>
+        <input type="text" id="accion" placeholder="Ingrese la accion">
+        <label for="precio-compra">Precio de Compra:</label>
+        <input type="number" id="precio-compra" placeholder="Ingrese el precio de compra">
+
+        <button id="guardarPrecioCompra">Enviar</button>
+        <button id="limpiarDatos">Limpiar datos</button>
+
+        <!-- Tabla de muestra de datos de tenencia de accion -->
+        <div id="tabla-acciones-container">
+            <h2>Acciones y Precios de Compra</h2>
+            <table id="tabla-acciones">
+                <tr>
+                    <th>Accion</th>
+                    <th>Precio de Compra</th>
+                </tr>
+            </table>
+        </div>
+
+        <script>
+            // Almacenamiento de precios de compra por accion, luego seran utilizados para comaprar con precio de hoy
+            function guardarPrecioCompra() {
+                const accionInput = document.getElementById('accion');
+                const precioCompraInput = document.getElementById('precio-compra');
+
+                const accion = accionInput.value;
+                const precioCompra = parseFloat(precioCompraInput.value);
+
+                if (accion.trim() !== '' && !isNaN(precioCompra)) {
+                    // Se guarda el precio de compra
+                    localStorage.setItem(accion, precioCompra);
+
+                    // Se vacia el espacio luego de haber guardado los datos en la variable
+                    accionInput.value = '';
+                    precioCompraInput.value = '';
+
+                    alert('Precio de compra guardado exitosamente.');
+
+                    // Actualizamos la tabla con los datos
+                    mostrarAccionesYPreciosEnTabla();
+                } else {
+                    alert('Por favor, ingrese datos validos.');
+                }
+            }
+
+            // Completamos la tabla con los datos recolectados
+            function mostrarAccionesYPreciosEnTabla() {
+                const tablaAcciones = document.getElementById('tabla-acciones');
+
+                // Limpiamos la tabla antes de agregar los nuevos datos
+                tablaAcciones.innerHTML = `
+                    <tr>
+                        <th>Accion</th>
+                        <th>Precio de Compra</th>
+                    </tr>
+                `;
+
+                // Recorremos todas las acciones para colocarlas en la tabla
+                for (let i = 0; i < localStorage.length; i++) {
+                    const accion = localStorage.key(i);
+                    const precioCompra = parseFloat(localStorage.getItem(accion));
+
+                    const fila = document.createElement('tr');
+
+                    const celdaAccion = document.createElement('td');
+                    celdaAccion.textContent = accion;
+
+                    const celdaPrecioCompra = document.createElement('td');
+                    celdaPrecioCompra.textContent = precioCompra;
+
+                    fila.appendChild(celdaAccion);
+                    fila.appendChild(celdaPrecioCompra);
+
+                    tablaAcciones.appendChild(fila);
+                }
+            }
+
+            // Limpiamos los espacios para seguir compeltando datos
+            function limpiarDatos() {
+                localStorage.clear();
+
+                // Actualizamos la tabla de acciones y precios de compra
+                mostrarAccionesYPreciosEnTabla();
+            }
+
+            // Asociamos el boton con su funcion
+            document.getElementById('guardarPrecioCompra').addEventListener('click', guardarPrecioCompra);
+
+            // Asociamos el boton con su funcion
+            document.getElementById('limpiarDatos').addEventListener('click', limpiarDatos);
+
+            // Mostramos la tabla
+            mostrarAccionesYPreciosEnTabla();
+        </script>
+    </header>
+
+    <!-- Parte de la pagina donde se toma la desicion (if, else) -->
+    <main>
+    <h1>Desicion</h1>
+    <label for="accionP1">Accion:</label>
+    <input type="text" id="accionP1" placeholder="Ingrese la accion">
+    <label for="precio-hoyP1">Precio de hoy:</label>
+    <input type="number" id="precio-hoyP1" placeholder="Ingrese el precio de hoy">
+
+    <button id="completar">Enviar</button>
+    <button id="limpiar">Limpiar datos</button>
+
+    <!-- Tabla de muestra de datos de desicion -->
+    <section>
+        <h2>Registros</h2>
+        <table id="tabla-registros">
+            <tr>
+                <th>Accion</th>
+                <th>Precio de Compra</th>
+                <th>Precio de Hoy</th>
+                <th>Resultado</th>
+            </tr>
+        </table>
+    </section>
+
+    <script>
+        // Almacenamiento de los datos cargados sobre los precios de las acciones del dia de hoy
+        let registros = [];
+
+        // Vamos agregando datos
+        function agregarRegistro() {
+            const accionInput = document.getElementById('accionP1');
+            const precioHoyInput = document.getElementById('precio-hoyP1');
+
+            const accion = accionInput.value;
+            const precioHoy = parseFloat(precioHoyInput.value);
+
+            // Cruzamos el dato de la accion con la tenencia para hacer la relacion.
+            if (!localStorage.getItem(accion)) {
+                alert('Disculpe pero usted no tiene tenencia de esa accion. Ingrese bien su nombre.');
+                return;
+            }
+
+            if (accion.trim() !== '' && !isNaN(precioHoy)) {
+                // Creamos un objeto con los datos de la accion y precio de hoy
+                const nuevoRegistro = {
+                    accion: accion,
+                    precioCompra: obtenerPrecioCompra(accion), // Obtenemos el precio de compra almacenado
+                    precioHoy: precioHoy
+                };
+
+                // Agregamos el valor nuevo
+                registros.push(nuevoRegistro);
+
+                // Limpiamos los campos de entrada
+                accionInput.value = '';
+                precioHoyInput.value = '';
+
+                // Mostramos los datos en la tabla
+                mostrarRegistrosEnTabla();
+            } else {
+                alert('Por favor, ingrese datos validos.');
+            }
+        }
+
+        // Funcion para limpiar completamente la variable de registros y limpiar la tabla
+        function limpiarRegistros() {
+            registros = [];
+            mostrarRegistrosEnTabla();
+        }
+
+        // Funcion para mostrar los registros en la tabla
+        function mostrarRegistrosEnTabla() {
+            const tablaRegistros = document.getElementById('tabla-registros');
+
+            // Limpiamos la tabla antes de agregar los nuevos registros
+            tablaRegistros.innerHTML = `
+                <tr>
+                    <th>Accion</th>
+                    <th>Precio de Compra</th>
+                    <th>Precio de Hoy</th>
+                    <th>Resultado</th>
+                </tr>
+            `;
+
+            // Recorremos los registros y vamos completando los datos en la tabla
+            registros.forEach(registro => {
+                const fila = document.createElement('tr');
+
+                const celdaAccion = document.createElement('td');
+                celdaAccion.textContent = registro.accion;
+
+                const celdaPrecioCompra = document.createElement('td');
+                celdaPrecioCompra.textContent = registro.precioCompra;
+
+                const celdaPrecioHoy = document.createElement('td');
+                celdaPrecioHoy.textContent = registro.precioHoy;
+                // Armamos el if para ver si vendemos o no la accion
+                const celdaResultado = document.createElement('td');
+                const porcentajeCompra = registro.precioCompra * 1.1;
+                if (registro.precioHoy >= porcentajeCompra) {
+                    celdaResultado.textContent = 'Momento de veder la posicion y capturar el beneficio del 10% o mas.';
+                } else {
+                    celdaResultado.textContent = 'Todavia no es momento de vender la posicion.';
+                }
+
+                fila.appendChild(celdaAccion);
+                fila.appendChild(celdaPrecioCompra);
+                fila.appendChild(celdaPrecioHoy);
+                fila.appendChild(celdaResultado);
+
+                tablaRegistros.appendChild(fila);
+            });
+        }
+
+        function obtenerPrecioCompra(accion) {
+            const precioCompraString = localStorage.getItem(accion);
+            return precioCompraString ? parseFloat(precioCompraString) : 0;
+        }
+
+        // Asociamos la funcion agregarRegistro al evento click del boton "Completar Mensaje"
+        document.getElementById('completar').addEventListener('click', agregarRegistro);
+
+        // Asociamos la funcion limpiarRegistros al evento click del boton "Limpiar Registros"
+        document.getElementById('limpiar').addEventListener('click', limpiarRegistros);
+
+        // Mostramos los registros al cargar la pagina por primera vez
+        mostrarRegistrosEnTabla();
+    </script>
+    </main>
+</body>    
+</html>

@@ -1,0 +1,40 @@
+<script>    
+    var cantidad_YPF = 100
+    var cantidad_PAMP = 1000
+    var cantidad_TSLA = 50
+    </script>
+    <H1>Seccion Merval</H1>
+    <h2>Decision a tomar sobre la tenencia de Acciones de YPF</h2>
+    <script>
+    let precio_referencia_YPF = 8100;
+    var precio_hoy_YPF = prompt("Que precio tiene la accion de YPF hoy?");
+    var beneficios_YPF = (precio_hoy_YPF - precio_referencia_YPF)*cantidad_YPF;
+    var comisiones = (0.7/100)
+    if (precio_referencia_YPF >= precio_hoy_YPF*(1-comisiones)){
+        document.write("Todavia no es tiempo de vender la accion");
+    }else{
+        document.write("Venda la accion y obtenga sus beneficios por " + beneficios_YPF);}
+    </script>
+    <h2>Decision a tomar sobre la tenencia de Acciones de Pampa Energia</h2>
+    <script>
+    let precio_referencia_PAMP = 915;
+    var precio_hoy_PAMP = prompt("Que precio tiene la accion de Pampa Energia hoy?");
+    var beneficios_PAMP = (precio_hoy_PAMP - precio_referencia_PAMP)*cantidad_PAMP;
+    var comisiones = (0.7/100)
+    if (precio_referencia_PAMP >= precio_hoy_PAMP*(1-comisiones)){
+        document.write("Todavia no es tiempo de vender la accion");
+    }else{
+        document.write("Venda la accion y obtenga sus beneficios por " + beneficios_PAMP);}
+    </script>
+    <h1>Seccion CEDEARS</h1>
+    <h2>Decision a tomar sobre la tenencia de Acciones de Tesla inc.</h2>
+    <script>
+    let precio_referencia_TSLA = 8100;
+    var precio_hoy_TSLA = prompt("Que precio tiene la accion de Tesla inc. hoy?");
+    var beneficios_TSLA = (precio_hoy_TSLA - precio_referencia_TSLA)*cantidad_TSLA;
+    var comisiones = (0.7/100)
+    if (precio_referencia_TSLA >= precio_hoy_TSLA*(1-comisiones)){
+        document.write("Todavia no es tiempo de vender la accion");
+    }else{
+        document.write("Venda la accion y obtenga sus beneficios por " + beneficios_TSLA);}
+    </script>
