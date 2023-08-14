@@ -8,65 +8,24 @@
 </head>
 <H1>Bienvenidos a tu libertad financiera</H1>
 <body>
-    <header>
-        <h1>Tasa de ganancia</h1>
-        <label for="tasa-ganancia">Tasa de Ganancia (%):</label>
-        <input type="number" id="tasa-ganancia" placeholder="Ingrese la tasa de ganancia">
-        <button id="actualizar-tasa">Actualizar Tasa</button>
-        <table id="tabla-tasa">
-            <tbody>
-                <tr>
-                    <td>Tasa de Ganancia</td>
-                    <td id="celda-tasa">0</td>
-                </tr>
-            </tbody>
-        </table>   
-        <h1>Tenencia</h1>
-        <label for="accion">Accion:</label>
-        <input type="text" id="accion" placeholder="Ingrese la accion">
-        <label for="precio-compra">Precio de Compra:</label>
-        <input type="number" id="precio-compra" placeholder="Ingrese el precio de compra">
+    <ul>
+        <li>
+        <a href="Paginas/Decision.html">Decision</a>
+        </li>
+    </ul>
+<section>
+<form>
+    <label for="email">Correo electrónico:</label>
+    <input type="email" id="email">
+    <br>
+    <label for="contraseña">Contraseña:</label>
+    <input type="password" id="contraseña">
+    <br>
+    <button type="button" onclick="registrarUsuario()">Registrar</button>
+  </form>   
 
-        <button id="guardarPrecioCompra">Enviar</button>
-
-        <!-- Tabla de muestra de datos de tenencia de accion -->
-        <div id="tabla-acciones-container">
-            <h2>Acciones y Precios de Compra</h2>
-            <table id="tabla-acciones">
-                <tr>
-                    <th>Accion</th>
-                    <th>Precio de Compra</th>
-                    <th>Decision</th>
-                </tr>
-            </table>
-        </div>
-    <h1>Desicion</h1>
-    <label for="fechaP1">Fecha:</label>
-    <input type="date" id="fechaP1" placeholder="Fecha de la cotizacion">
-    <label for="accionP1">Accion:</label>
-    <input type="text" id="accionP1" placeholder="Ingrese la accion">
-    <label for="precio-hoyP1">Precio de hoy:</label>
-    <input type="number" id="precio-hoyP1" placeholder="Ingrese el precio de hoy">
-
-    <button id="completar">Enviar</button>
-    <button id="limpiar">Limpiar datos</button>
-
-    <!-- Tabla de muestra de datos de desicion -->
-    <section>
-        <h2>Registros</h2>
-        <table id="tabla-registros">
-            <tr>
-                <th>Fecha</th>
-                <th>Accion</th>
-                <th>Precio de Compra</th>
-                <th>Precio de Hoy</th>
-                <th>Resultado</th>
-            </tr>
-        </table>  
-    </section>
-    <script src="./index.js">   
-    </script>
-    </header>
-    
+</section>
+<script src="./index.js">   
+</script>
 </body>    
 </html>

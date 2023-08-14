@@ -1,3 +1,13 @@
+function registrarUsuario() {
+    var email = document.getElementById("email").value;
+    var contraseña = document.getElementById("contraseña").value;
+
+    // Aquí puedes agregar código para validar los campos si es necesario
+    // Restablecer los valores de los campos a cadena vacía
+    document.getElementById("email").value = "";
+    document.getElementById("contraseña").value = "";
+}
+
 document.getElementById('actualizar-tasa').addEventListener('click', actualizarTasaGanancia);
 
 let tasaDeGanancia = 0;
