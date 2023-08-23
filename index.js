@@ -43,11 +43,19 @@ function guardarPrecioCompra() {
         // Se vacia el espacio luego de haber guardado los datos en la variable
         accionInput.value = '';
         precioCompraInput.value = '';
-        alert('Precio de compra guardado exitosamente.');
+        Swal.fire({
+                title: "Precio de compra guardado exitosamente",
+                icon: "success",
+                confirmButtonText: "Ok",
+            });
         // Actualizamos la tabla con los datos
         mostrarAccionesYPreciosEnTabla();
         } else {
-        alert('Por favor, ingrese datos validos.');
+            Swal.fire({
+                title: "Por favor ingrese bien los datos",
+                icon: "error",
+                confirmButtonText: "Ok",
+            });
         }
 }
 // Completamos la tabla con los datos recolectados
@@ -114,7 +122,12 @@ for (let i = 0; i < localStorage.length; i++) {
            const precioHoy = parseFloat(precioHoyInput.value);
             // Cruzamos el dato de la accion con la tenencia para hacer la relacion.
            if (!localStorage.getItem(accion)) {
-               alert('Disculpe pero usted no tiene tenencia de esa accion. Ingrese bien su nombre.');
+                Swal.fire({
+                    title: "Disculpe pero usted no tiene tenencia de esa accion.",
+                    text: "Ingrese bien su nombre.",
+                    icon: "error",
+                    confirmButtonText: "Ok",
+                });
                return;
            }
             if (accion.trim() !== '' && !isNaN(precioHoy)) {
@@ -134,7 +147,11 @@ for (let i = 0; i < localStorage.length; i++) {
                 // Mostramos los datos en la tabla
                mostrarRegistrosEnTabla();
            } else {
-               alert('Por favor, ingrese datos validos.');
+               Swal.fire({
+                title: "Por favor ingrese bien los datos",
+                icon: "error",
+                confirmButtonText: "Ok",
+            }); 
            }
        }
         // Funcion para limpiar completamente la variable de registros y limpiar la tabla
