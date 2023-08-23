@@ -5,6 +5,11 @@ function registrarUsuario() {
     // Aquí puedes agregar código para validar los campos si es necesario
     // Restablecer los valores de los campos a cadena vacía
     document.getElementById("email").value = "";
+    Swal.fire({
+        title: "El email ha sido registrado con exito.",
+        icon: "success",
+        confirmButtonText: "Ok",
+    });
     document.getElementById("contraseña").value = "";
 }
 
@@ -28,6 +33,11 @@ function actualizarTasaGanancia() {
 function mostrarTasaEnTabla(tasa) {
     const celdaTasa = document.getElementById('celda-tasa');
     celdaTasa.textContent = tasa + "%";
+        Swal.fire({
+            title: "La tasa de ganancia ha sido registrado con exito.",
+            icon: "success",
+            confirmButtonText: "Ok",
+        });
 }
 
 
@@ -89,6 +99,11 @@ for (let i = 0; i < localStorage.length; i++) {
         eliminarBtn.textContent = 'Vendida';
         eliminarBtn.addEventListener('click', function() {
             eliminarAccion(accion);
+        Swal.fire({
+            title: "Felicidades ha concretado la venta.",
+            icon: "success",
+            confirmButtonText: "Ok",
+        });    
         });
            
     celdaEliminar.appendChild(eliminarBtn);
@@ -189,8 +204,18 @@ for (let i = 0; i < localStorage.length; i++) {
                const porcentajeCompra = registro.precioCompra * (1 + (tasaDeGanancia/100));
                if (registro.precioHoy >= porcentajeCompra) {
                    celdaResultado.textContent = "Momento de veder la posicion y capturar el beneficio del " + tasaDeGanancia + "%";
+                   Swal.fire({
+                    title: "Momento de veder la posicion y capturar el beneficio del " + tasaDeGanancia + "%",
+                    icon: "succes",
+                    confirmButtonText: "Ok",
+                });
                } else {
                    celdaResultado.textContent = 'Todavia no es momento de vender la posicion.';
+                   Swal.fire({
+                    title: "Todavia no es momento de vender la posicion.",
+                    icon: "error",
+                    confirmButtonText: "Ok",
+                });
                }
                fila.appendChild(celdafecha);
                fila.appendChild(celdaAccion);
