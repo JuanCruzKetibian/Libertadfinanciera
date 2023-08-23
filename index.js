@@ -1,17 +1,26 @@
-function registrarUsuario() {
-    var email = document.getElementById("email").value;
-    var contraseña = document.getElementById("contraseña").value;
-
-    // Aquí puedes agregar código para validar los campos si es necesario
-    // Restablecer los valores de los campos a cadena vacía
-    document.getElementById("email").value = "";
+  document.getElementById("loginButton").addEventListener("click", function() {
     Swal.fire({
-        title: "El email ha sido registrado con exito.",
-        icon: "success",
-        confirmButtonText: "Ok",
+      title: 'Iniciar sesión',
+      html:
+        '<input id="email" class="swal2-input" placeholder="Email">' +
+        '<input id="password" type="password" class="swal2-input" placeholder="Contraseña">',
+      showCancelButton: true,
+      confirmButtonText: 'Iniciar sesión',
+      cancelButtonText: 'Cancelar',
+      preConfirm: () => {
+        const email = Swal.getPopup().querySelector('#email').value;
+        const password = Swal.getPopup().querySelector('#password').value;
+        
+        // Simulación de validación (reemplaza con tu lógica real)
+        if (email === 'correo@example.com' && password === 'contraseña') {
+          // Redirige a la página deseada después de la validación
+          window.location.href = 'Paginas/Decision.html';
+        } else {
+          window.location.href = 'Paginas/Decision.html';
+        }
+      }
     });
-    document.getElementById("contraseña").value = "";
-}
+  });
 
 document.getElementById('actualizar-tasa').addEventListener('click', actualizarTasaGanancia);
 
