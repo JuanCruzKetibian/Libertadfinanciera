@@ -62,19 +62,19 @@ function guardarPrecioCompra() {
         // Se vacia el espacio luego de haber guardado los datos en la variable
         accionInput.value = '';
         precioCompraInput.value = '';
-        Swal.fire({
-                title: "Precio de compra guardado exitosamente",
-                icon: "success",
-                confirmButtonText: "Ok",
-            });
+        Toastify({
+            text: "Precio de compra registrado correctamente.",
+            backgroundColor: "green",
+            duration: 3000
+            }).showToast();
         // Actualizamos la tabla con los datos
         mostrarAccionesYPreciosEnTabla();
         } else {
-            Swal.fire({
-                title: "Por favor ingrese bien los datos",
-                icon: "error",
-                confirmButtonText: "Ok",
-            });
+            Toastify({
+                text: "Por favor registre correctamente la accion.",
+                backgroundColor: "red",
+                duration: 3000
+                }).showToast();
         }
 }
 // Completamos la tabla con los datos recolectados
@@ -146,12 +146,11 @@ for (let i = 0; i < localStorage.length; i++) {
            const precioHoy = parseFloat(precioHoyInput.value);
             // Cruzamos el dato de la accion con la tenencia para hacer la relacion.
            if (!localStorage.getItem(accion)) {
-                Swal.fire({
-                    title: "Disculpe pero usted no tiene tenencia de esa accion.",
-                    text: "Ingrese bien su nombre.",
-                    icon: "error",
-                    confirmButtonText: "Ok",
-                });
+            Toastify({
+                text: "Disculpe pero usted no tiene tenencia de esa accion.",
+                backgroundColor: "red",
+                duration: 3000
+                }).showToast();
                return;
            }
             if (accion.trim() !== '' && !isNaN(precioHoy)) {
