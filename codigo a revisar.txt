@@ -1,5 +1,107 @@
-const apiKey = 'BPD0Y0J8Z92DUOXX';
-const symbols = ['AAPL', 'GOOGL', 'MSFT', 'AMZN']; // Símbolos de las acciones que deseas obtener
+Index:
+<html lang="es"> <!-- se especifca en que lenguaje esta el sitio -->
+<head> <!-- lo que esta dentro del head no se va a ver en el sitio, es la parte de "atras" del sitio (configuraciones) -->
+    <meta charset="UTF-8"> <!-- visualizacion de los caracteres especiales -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> <!-- se usa para la compatibilidad entre el internet explorer y el microsoft edge -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- ajustable a celulares o tablets -->
+    <title> Operador de acciones </title> <!-- titulo del sitio web en la pestaña -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<H1>Bienvenidos a tu libertad financiera</H1>
+<body>
+    <button id="loginButton">Iniciar sesión</button> 
+ <h1>Cotizaciones de Acciones</h1>
+  <div id="cotizacion-panel">
+    <!-- Aquí se mostrarán los datos de cotización -->
+  </div>       
+<section>
+<form>
+</form>   
+</section>
+<script src="./index.js">   
+</script>
+</body>    
+</html>
+
+Decision:
+<html lang="es"> <!-- se especifca en que lenguaje esta el sitio -->
+<head> <!-- lo que esta dentro del head no se va a ver en el sitio, es la parte de "atras" del sitio (configuraciones) -->
+    <meta charset="UTF-8"> <!-- visualizacion de los caracteres especiales -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> <!-- se usa para la compatibilidad entre el internet explorer y el microsoft edge -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- ajustable a celulares o tablets -->
+    <title> Operador de acciones </title> <!-- titulo del sitio web en la pestaña -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js@1.12.0/src/toastify.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/toastify-js@1.12.0/src/toastify.min.css" rel="stylesheet">
+</head>
+<H1>Tablero de toma de decision.</H1>
+<body>
+    <header>
+        <h1>Tasa de ganancia</h1>
+        <label for="tasa-ganancia">Tasa de Ganancia (%):</label>
+        <input type="number" id="tasa-ganancia" placeholder="Ingrese la tasa de ganancia">
+        <button id="actualizar-tasa">Actualizar Tasa</button>
+        <table id="tabla-tasa">
+            <tbody>
+                <tr>
+                    <td>Tasa de Ganancia</td>
+                    <td id="celda-tasa">0</td>
+                </tr>
+            </tbody>
+        </table>   
+        <h1>Tenencia</h1>
+        <label for="accion">Accion:</label>
+        <input type="text" id="accion" placeholder="Ingrese la accion">
+        <label for="precio-compra">Precio de Compra:</label>
+        <input type="number" id="precio-compra" placeholder="Ingrese el precio de compra">
+
+        <button id="guardarPrecioCompra">Enviar</button>
+
+        <!-- Tabla de muestra de datos de tenencia de accion -->
+        <div id="tabla-acciones-container">
+            <h2>Acciones y Precios de Compra</h2>
+            <table id="tabla-acciones">
+                <tr>
+                    <th>Accion</th>
+                    <th>Precio de Compra</th>
+                    <th>Decision</th>
+                </tr>
+            </table>
+        </div>
+    <h1>Desicion</h1>
+    <label for="fechaP1">Fecha:</label>
+    <input type="date" id="fechaP1" placeholder="Fecha de la cotizacion">
+    <label for="accionP1">Accion:</label>
+    <input type="text" id="accionP1" placeholder="Ingrese la accion">
+    <label for="precio-hoyP1">Precio de hoy:</label>
+    <input type="number" id="precio-hoyP1" placeholder="Ingrese el precio de hoy">
+
+    <button id="completar">Enviar</button>
+    <button id="limpiar">Limpiar datos</button>
+
+    <!-- Tabla de muestra de datos de desicion -->
+    <section>
+        <h2>Registros</h2>
+        <table id="tabla-registros">
+            <tr>
+                <th>Fecha</th>
+                <th>Accion</th>
+                <th>Precio de Compra</th>
+                <th>Precio de Hoy</th>
+                <th>Resultado</th>
+            </tr>
+        </table>  
+    </section>
+    <script src="../index.js">   
+    </script> 
+    </header>
+   
+</body>    
+</html>
+
+JavaScript:
+const apiKey = 'I27TELSHCZ28K8V4';
+    const symbols = ['AAPL', 'GOOGL', 'MSFT', 'AMZN', 'TSLA', 'V', 'PYPL']; // Símbolos de las acciones que deseas obtener
 
     symbols.forEach(symbol => {
       const apiUrl = `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${symbol}&interval=5min&apikey=${apiKey}`;
@@ -25,6 +127,7 @@ const symbols = ['AAPL', 'GOOGL', 'MSFT', 'AMZN']; // Símbolos de las acciones 
         });
     });
 
+
   document.getElementById("loginButton").addEventListener("click", function() {
     Swal.fire({
       title: 'Iniciar sesión',
@@ -41,9 +144,9 @@ const symbols = ['AAPL', 'GOOGL', 'MSFT', 'AMZN']; // Símbolos de las acciones 
         // Simulación de validación (reemplaza con tu lógica real)
         if (email === 'correo@example.com' && password === 'contraseña') {
           // Redirige a la página deseada después de la validación
-          window.location.href = '../Paginas/Decision.html';
+          window.location.href = 'Paginas/Decision.html';
         } else {
-          window.location.href = '../Paginas/Decision.html';
+          window.location.href = 'Paginas/Decision.html';
         }
       }
     });
@@ -238,9 +341,9 @@ for (let i = 0; i < localStorage.length; i++) {
                const celdaResultado = document.createElement('td');
                const porcentajeCompra = registro.precioCompra * (1 + (tasaDeGanancia/100));
                if (registro.precioHoy >= porcentajeCompra) {
-                   celdaResultado.textContent = "Momento de veder la posicion y capturar el beneficio del " + tasaDeGanancia + "% o mas";
+                   celdaResultado.textContent = "Momento de veder la posicion y capturar el beneficio del " + tasaDeGanancia + "%";
                    Swal.fire({
-                    title: "Momento de veder la posicion y capturar el beneficio del " + tasaDeGanancia + "% o mas",
+                    title: "Momento de veder la posicion y capturar el beneficio del " + tasaDeGanancia + "%",
                     icon: "succes",
                     confirmButtonText: "Ok",
                 });
@@ -270,3 +373,4 @@ for (let i = 0; i < localStorage.length; i++) {
        document.getElementById('limpiar').addEventListener('click', limpiarRegistros);
         // Mostramos los registros al cargar la pagina por primera vez
        mostrarRegistrosEnTabla();
+
