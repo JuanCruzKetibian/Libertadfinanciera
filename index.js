@@ -1,3 +1,32 @@
+const apiKey = 'I27TELSHCZ28K8V4';
+    const symbols = ['AAPL', 'GOOGL', 'MSFT', 'AMZN', 'TSLA', 'V', 'PYPL']; // Símbolos de las acciones que deseas obtener
+
+    symbols.forEach(symbol => {
+      const apiUrl = `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${symbol}&interval=5min&apikey=${apiKey}`;
+
+      fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+          const cotizacionPanel = document.getElementById('cotizacion-panel');
+          const lastRefreshed = data['Meta Data']['3. Last Refreshed'];
+          const latestPrice = data['Time Series (5min)'][lastRefreshed]['4. close'];
+
+          const symbolContainer = document.createElement('div');
+          symbolContainer.innerHTML = `
+            <h2>Cotización de ${symbol}</h2>
+            <p>Última actualización: ${lastRefreshed}</p>
+            <p>Precio más reciente: $${latestPrice}</p>
+            <hr>
+          `;
+
+          cotizacionPanel.appendChild(symbolContainer);
+        })
+        .catch(error => {
+          console.error(`Error al obtener los datos de ${symbol}:`, error);
+        });
+    });
+
+
   document.getElementById("loginButton").addEventListener("click", function() {
     Swal.fire({
       title: 'Iniciar sesión',
